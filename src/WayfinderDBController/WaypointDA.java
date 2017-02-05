@@ -229,4 +229,22 @@ public class WaypointDA {
         return universalPoints;
     }
 
+    public static void increaseWaypointFeedback(String waypointId)throws SQLException{
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("UPDATE waypoint SET feedbackAmt = feedbackAmt+1 WHERE id = '" + waypointId + "';");
+        myStmt.executeUpdate();
+    }
+
+    public static void decreaseWaypointFeedback(String waypointId, int amt)throws SQLException{
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("UPDATE waypoint SET feedbackAmt = feedbackAmt-"+amt+" WHERE id = '" + waypointId + "';");
+        myStmt.executeUpdate();
+    }
+
 }

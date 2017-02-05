@@ -31,7 +31,7 @@
                 '<td>'+isEnabled+'</td>'+
                 '<td>'+amt+'</td>'+
                 '<td>'+
-                '<a class="btn btn-primary" href="">View</a>' +
+                '<a class="btn btn-primary" href="http://localhost:8080/WaypointFeedbackControl.jsp">View</a>' +
                 '</td>' +
                 '</tr>'
             );
@@ -56,10 +56,10 @@
                     for(var i=0; i<response.length; i++)
                     {
                         var f =response[i];
-                        var isEnabled = true;
+                        var isEnabled = "Enabled";
 
                         if(f.listValue = 0){
-                            isEnabled = false;
+                            isEnabled = "Disabled";
                         }
 
                         appendTableFeedback(f.id, f.name, isEnabled, f.feedBackAmt);

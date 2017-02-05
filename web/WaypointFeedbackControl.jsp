@@ -1,4 +1,4 @@
-<%--
+<%@ page import="WayfinderModel.Waypoint" %><%--
   Created by IntelliJ IDEA.
   User: User
   Date: 2/5/2017
@@ -17,6 +17,11 @@
           rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
           rel="stylesheet" type="text/css">
+
+    <%
+        Waypoint name = (Waypoint) session.getAttribute("feedbackSelected");
+
+    %>
 
     <script>
 

@@ -19,11 +19,11 @@ import java.util.ArrayList;
  */
 public class WaypointFeedbackService {
 
-    @Path("/waypointFeedback")
+    @Path("/waypointFeedback/{id}")
     public class WayfinderFeedbackService{
 
         @GET
-        @Path("/{id}")
+        //@Path("waypointFeedback/{id}")
         @Produces({MediaType.APPLICATION_JSON})
         public String getAllFeedbackWaypoints(@PathParam("id") String id) throws SQLException
         {
