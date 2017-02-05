@@ -39,8 +39,8 @@ public class WaypointDA {
         String name = myRs.getString(2);
         int pointX = myRs.getInt(3);
         int pointY = myRs.getInt(4);
-        String listValue = myRs.getString(5);
-        boolean access = myRs.getBoolean(6);
+        boolean access = myRs.getBoolean(5);
+        String listValue = myRs.getString(6);
         double coeff = myRs.getDouble(7);
         int count = myRs.getInt(8);
         int feedbackAmt = myRs.getInt(9);

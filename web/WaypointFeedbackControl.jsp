@@ -22,6 +22,7 @@
         Waypoint wa = (Waypoint) session.getAttribute("feedbackSelected");
 
         String name = wa.getName();
+        String waId = wa.getId();
         String isEnabled = "Enabled";
         if(wa.getListValue().equalsIgnoreCase("1"))
             isEnabled = "Disabled";
@@ -44,7 +45,7 @@
                 '<td>'+errType+'</td>'+
                 '<td>'+isCrit+'</td>'+
                 '<td>'+
-                '<a class="btn btn-primary" href="">Resolved</a>' +
+                '<a class="btn btn-primary" href="">Dismiss</a>' +
                 '</td>' +
                 '</tr>'
             );
@@ -53,7 +54,7 @@
 
         function getFeedback(){
 
-            var url = '/services/waypointFeedback/getAllFeedback/A1-002';
+            var url = '/services/waypointFeedback/getAllFeedback/<%=waId%>';
 
             $.ajax({
 
@@ -67,7 +68,6 @@
 
                     for(var i=0; i<response.length; i++)
                     {
-                        index++;
                         var f =response[i];
                         var errType;
 
@@ -86,6 +86,7 @@
                         }
 
                         appendTableFeedback(index, errType , f.crit);
+                        index++;
                     }
 
                 }
@@ -144,9 +145,28 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-3">
                 <h3>Waypoint Status: <%=isEnabled%></h3>
-                <a class="btn btn-primary">Toggle Status</a>
+            </div>
+            <div class="col-md-3">
+                <h3 style="display: inline-block;">Current Coefficient: <br> 1 </h3>
+            </div>
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-3">
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3">
+                <a class="btn btn-primary" style="display: inline">Toggle Status</a>
+            </div>
+            <div class="col-md-3">
+                <a class="btn btn-primary" style="display: inline">Increase Coeff.</a>
+                <a class="btn btn-primary" style="display: inline">Decrease Coeff.</a>
+            </div>
+            <div class="col-md-3">
+            </div>
+            <div class="col-md-3">
             </div>
         </div>
     </div>
@@ -154,7 +174,7 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
+            <div class="col-md-12 text-right">
                 <table class="table" id="feedbackTable">
                     <thead>
                     <tr>
@@ -170,11 +190,14 @@
                         <td>Waypoint Inaccessible</td>
                         <td>False</td>
                         <td >
-                            <a class="btn btn-primary">Resolved</a>
+                            <a class="btn btn-primary">Dismiss</a>
                         </td>
                     </tr>
                     </tbody>
                 </table>
+
+                <a class="btn btn-primary" style="display: inline">Dismiss All</a>
+                <a class="btn btn-primary" style="display: inline" href="WayfinderWaypointControl.jsp">Back</a>
             </div>
         </div>
     </div>

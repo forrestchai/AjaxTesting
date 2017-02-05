@@ -93,4 +93,13 @@ public class FeedbackDA {
         return new Feedback(id,name,waypointId,crit,type,dateTime);
     }
 
+    public static void deleteFeedback(String id) throws SQLException {
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("DELETE FROM feedback WHERE id="+id+";");
+        myStmt.executeUpdate();
+    }
+
 }

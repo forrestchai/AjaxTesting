@@ -23,6 +23,8 @@
 
         function appendTableFeedback(waypointId, waypointName, isEnabled, amt, crit){
 
+            console.log(waypointId + 'WHAT');
+
             var feedbackTable = $('#feedbackTable > tbody:last');
             feedbackTable.append(
                 '<tr>'+
@@ -31,7 +33,7 @@
                 '<td>'+isEnabled+'</td>'+
                 '<td>'+amt+'</td>'+
                 '<td>'+
-                '<a class="btn btn-primary" href="http://localhost:8080/waypointRedirect?waypointId="'+waypointId+'>View</a>' +
+                '<a class="btn btn-primary" href="http://localhost:8080/waypointRedirect?waypointId='+waypointId+'">View</a>' +
                 '</td>' +
                 '</tr>'
             );

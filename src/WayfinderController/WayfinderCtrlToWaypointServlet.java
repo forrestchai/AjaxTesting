@@ -23,12 +23,12 @@ public class WayfinderCtrlToWaypointServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String waId = "A1-002";//request.getParameter("waypointId");
+        String waId = request.getParameter("waypointId");
 
         try
         {
             HttpSession session = request.getSession();
-            Waypoint wa = (Waypoint) WaypointDA.getWaypointById(waId);
+            Waypoint wa = (Waypoint) WaypointDA.getWaypoint(waId);
             session.setAttribute("feedbackSelected", wa);
         }catch(SQLException e){e.printStackTrace();}
 
