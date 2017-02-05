@@ -59,7 +59,7 @@
                         var f =response[i];
                         var isEnabled = "Enabled";
 
-                        if(f.listValue = 0){
+                        if(f.listValue == "1"){
                             isEnabled = "Disabled";
                         }
 

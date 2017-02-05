@@ -16,6 +16,8 @@ public class Waypoint extends Point{
     String desc;
     boolean accL;
 
+    public Waypoint() {}
+
     public Waypoint(String id, String name, int offX, int offY, String listValue, boolean access, double coeff, int count, int feedBackAmt, String cpString, String desc, boolean accL) {
         super(id, offX, offY, access);
         this.name = name;

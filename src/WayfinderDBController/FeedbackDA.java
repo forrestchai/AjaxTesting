@@ -102,4 +102,22 @@ public class FeedbackDA {
         myStmt.executeUpdate();
     }
 
+    public static void deleteAllIdFeedback(String id) throws SQLException {
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("DELETE FROM feedback WHERE waypoint_id="+id+";");
+        myStmt.executeUpdate();
+    }
+
+    public static void deleteAllFeedback(String id) throws SQLException {
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("DELETE * FROM feedback;");
+        myStmt.executeUpdate();
+    }
+
 }

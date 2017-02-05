@@ -38,10 +38,15 @@ public class WaypointFeedbackService {
         }
 
         @GET
-        @Path("/toggleStatus/{id}")
-        public void toggleWaypointStatus(@PathParam("id") String id) throws SQLException
+        @Produces({MediaType.APPLICATION_JSON})
+        @Path("/checkStatus/{id}")
+        public String checkWaypointStatus(@PathParam("id") String id) throws SQLException
         {
+            Gson gson = new Gson();
 
+            Waypoint w = WaypointDA.getWaypoint(id);
+
+            return gson.toJson(w);
         }
 
 

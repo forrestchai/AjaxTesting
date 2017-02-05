@@ -34,6 +34,7 @@
         $(document).ready(function()
         {
             getFeedback();
+            refreshToggle();
         })
 
         function appendTableFeedback(index, errType, isCrit){
@@ -95,6 +96,8 @@
             })
 
         }
+
+
 
     </script>
 
@@ -158,7 +161,7 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <a class="btn btn-primary" style="display: inline">Toggle Status</a>
+                <a class="btn btn-primary" style="display: inline" onclick="setTimeout(refreshToggle(), 1000)" href="/enableWaypoint?id=<%=waId%>" >Toggle Status</a>
             </div>
             <div class="col-md-3">
                 <a class="btn btn-primary" style="display: inline">Increase Coeff.</a>
