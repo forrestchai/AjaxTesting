@@ -18,7 +18,7 @@
 
         $(document).ready(function()
         {
-            getFeedback();
+            getAllFeedback();
         })
 
         function appendTableFeedback(waypointId, waypointName, isEnabled, amt, crit){
@@ -31,14 +31,13 @@
                 '<td>'+isEnabled+'</td>'+
                 '<td>'+amt+'</td>'+
                 '<td>'+
-                '<a class="btn btn-primary" href="http://localhost:8080/WaypointFeedbackControl.jsp">View</a>' +
+                '<a class="btn btn-primary" href="http://localhost:8080/waypointRedirect?waypointId="'+waypointId+'>View</a>' +
                 '</td>' +
                 '</tr>'
             );
-
         }
 
-        function getFeedback(){
+        function getAllFeedback(){
 
             var url = '/services/wayfinderFeedback';
             var allFeedback = [];

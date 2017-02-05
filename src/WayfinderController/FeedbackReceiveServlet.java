@@ -36,7 +36,7 @@ public class FeedbackReceiveServlet extends HttpServlet {
         String type = request.getParameter("type");
         HttpSession session=request.getSession();
         //String waId = (String) session.getAttribute("currId");
-        String waId = "A1-003";
+        String waId = "A1-002";
         int randomNum = ThreadLocalRandom.current().nextInt(0000, 9997 + 1);
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
         String fbId = Integer.toString(randomNum);

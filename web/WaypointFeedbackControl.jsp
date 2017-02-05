@@ -19,7 +19,12 @@
           rel="stylesheet" type="text/css">
 
     <%
-        Waypoint name = (Waypoint) session.getAttribute("feedbackSelected");
+        Waypoint wa = (Waypoint) session.getAttribute("feedbackSelected");
+
+        String name = wa.getName();
+        String isEnabled = "Enabled";
+        if(wa.getListValue().equalsIgnoreCase("1"))
+            isEnabled = "Disabled";
 
     %>
 
@@ -30,13 +35,13 @@
             getFeedback();
         })
 
-        function appendTableFeedback(index, waypointName, isCrit){
+        function appendTableFeedback(index, errType, isCrit){
 
             var feedbackTable = $('#feedbackTable > tbody:last');
             feedbackTable.append(
                 '<tr>'+
                 '<td>'+ index +'</td>'+
-                '<td>'+waypointName+'</td>'+
+                '<td>'+errType+'</td>'+
                 '<td>'+isCrit+'</td>'+
                 '<td>'+
                 '<a class="btn btn-primary" href="">Resolved</a>' +
@@ -48,8 +53,7 @@
 
         function getFeedback(){
 
-            var url = '/services/waypointFeedback/A1-003';
-            var allFeedback = [];
+            var url = '/services/waypointFeedback/getAllFeedback/A1-002';
 
             $.ajax({
 
@@ -59,19 +63,29 @@
                 datatype: 'json',
                 success:function(response)
                 {
-                    allFeedback = response;
+                    var index=1;
 
                     for(var i=0; i<response.length; i++)
                     {
+                        index++;
                         var f =response[i];
-                        var index=1;
-                        var isCrit = false;
+                        var errType;
 
-                        if(f.listValue = 1){
-                            isCrit = true;
+                        switch(f.type) {
+                            case 2:
+                                errType = "Area Busy";
+                                break;
+                            case 3:
+                                errType = "Missing QR Code";
+                                break;
+                            case 4:
+                                errType = "Hard To Find Waypoint";
+                                break;
+                            default:
+                                errType = "Waypoint Inaccessible";
                         }
 
-                        appendTableFeedback(f.id, f.name, isEnabled, f.feedBackAmt);
+                        appendTableFeedback(index, errType , f.crit);
                     }
 
                 }
@@ -119,7 +133,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">
-                <h1 class="text-left">A&amp;E Entrance</h1>
+                <h1 class="text-left"><%=name%></h1>
             </div>
         </div>
         <div class="row">
@@ -131,7 +145,7 @@
         </div>
         <div class="row">
             <div class="col-md-12">
-                <h3>Waypoint Status: Enabled</h3>
+                <h3>Waypoint Status: <%=isEnabled%></h3>
                 <a class="btn btn-primary">Toggle Status</a>
             </div>
         </div>
@@ -141,7 +155,7 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <table class="table" id="waypointTable">
+                <table class="table" id="feedbackTable">
                     <thead>
                     <tr>
                         <th style="width:50px">#</th>

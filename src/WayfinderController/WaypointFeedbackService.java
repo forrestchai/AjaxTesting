@@ -17,21 +17,32 @@ import java.util.ArrayList;
 /**
  * Created by User on 2/5/2017.
  */
+@Path("/waypointFeedback")
 public class WaypointFeedbackService {
 
-    @Path("/waypointFeedback/{id}")
-    public class WayfinderFeedbackService{
-
         @GET
-        //@Path("waypointFeedback/{id}")
+        @Path("/getAllFeedback/{id}")
         @Produces({MediaType.APPLICATION_JSON})
-        public String getAllFeedbackWaypoints(@PathParam("id") String id) throws SQLException
+        public String getAllFeedbackWaypoints(@PathParam("id") String id)
         {
+
             Gson gson = new Gson();
-            ArrayList<Feedback> fbList = FeedbackDA.getAllFeedback(id);
+            ArrayList<Feedback> fbList = new ArrayList<Feedback>();
+            try
+            {
+                fbList = FeedbackDA.getAllFeedback(id);
+            }catch(SQLException e){e.printStackTrace();}
+
 
             return gson.toJson(fbList);
         }
-    }
+
+        @GET
+        @Path("/toggleStatus/{id}")
+        public void toggleWaypointStatus(@PathParam("id") String id) throws SQLException
+        {
+
+        }
+
 
 }

@@ -247,4 +247,13 @@ public class WaypointDA {
         myStmt.executeUpdate();
     }
 
+    public static void disableWaypoint(String waypointId)throws SQLException{
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("UPDATE waypoint SET listValue = 1 WHERE id = '" + waypointId + "';");
+        myStmt.executeUpdate();
+    }
+
 }
