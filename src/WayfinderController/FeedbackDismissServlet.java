@@ -1,16 +1,23 @@
 package WayfinderController;
 
+import WayfinderDBController.FeedbackDA;
+import WayfinderDBController.WaypointDA;
+import WayfinderModel.Feedback;
+import WayfinderModel.Waypoint;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  * Created by User on 2/6/2017.
  */
-@WebServlet(name = "FeedbackDismissServlet", urlPatterns = "/feedbackDismiss")
+@WebServlet(name = "FeedbackDismissServlet", urlPatterns = "/feedbackDismiss") // /feedbackDismiss?all=no&delAllId=no&delId=
 public class FeedbackDismissServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
@@ -18,21 +25,44 @@ public class FeedbackDismissServlet extends HttpServlet {
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
+        HttpSession session = request.getSession();
+
         String delAll = request.getParameter("all");
         String delAllId = request.getParameter("delAllId");
         String delId = request.getParameter("delId");
 
-        if(!delAll.equalsIgnoreCase("no"))
+        String location = request.getParameter("from");
+
+        try
         {
 
-        }
-        else if (!delAllId.equalsIgnoreCase("no"))
-        {
+//        if(!delAll.equalsIgnoreCase("no"))
+//        {
+//
+//        }
+//        else
+            if (!delAllId.equalsIgnoreCase("no"))
+            {
+                Waypoint wa = (Waypoint) session.getAttribute("feedbackSelected");
+                int fbNum = FeedbackDA.getAllFeedback(wa.getId()).size();
+                FeedbackDA.deleteAllIdFeedback(delAllId);
+                WaypointDA.decreaseWaypointFeedback(wa.getId(), fbNum);
+            }
+            else
+            {
+                FeedbackDA.deleteFeedback(delId);
+                Waypoint wa = (Waypoint) session.getAttribute("feedbackSelected");
+                WaypointDA.decreaseWaypointFeedback(wa.getId(), 1);
+            }
+        }catch(SQLException e){e.printStackTrace();}
 
-        }
-        else
-        {
 
+
+        switch(location){
+            case "feedback": response.sendRedirect("WaypointFeedbackControl.jsp");
+                break;
+            default:  response.sendRedirect("WayfinderWaypoinControl.jsp");
+                break;
         }
 
     }

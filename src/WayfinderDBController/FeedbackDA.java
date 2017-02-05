@@ -19,10 +19,12 @@ public class FeedbackDA {
         PreparedStatement preparedStatement = null;
 
         String insertTableSQL = "INSERT INTO wayfinder.feedback"
-                + "(id, name, waypoint_id, crit, type, date) VALUES"
-                + "(?,?,?,?,?,?)";
+                + "(id, name, waypoint_id, crit, type, date, time) VALUES"
+                + "(?,?,?,?,?,?,?)";
 
-        java.sql.Date timeNow = new Date(Calendar.getInstance().getTimeInMillis());
+        java.sql.Date dateNow = new Date(Calendar.getInstance().getTimeInMillis());
+
+        java.sql.Time timeNow = new java.sql.Time(dateNow.getTime());
 
         try {
             preparedStatement = myConn.prepareStatement(insertTableSQL);
@@ -32,7 +34,8 @@ public class FeedbackDA {
             preparedStatement.setString(3, f.getWaypointId());
             preparedStatement.setBoolean(4, f.getCrit());
             preparedStatement.setInt(5, f.getType());
-            preparedStatement.setDate(6, timeNow);
+            preparedStatement.setDate(6, dateNow);
+            preparedStatement.setTime(7, timeNow);
 
             preparedStatement.executeUpdate();
 
@@ -88,9 +91,10 @@ public class FeedbackDA {
         String waypointId = myRs.getString(3);
         boolean crit = myRs.getBoolean(4);
         int type = myRs.getInt(5);
-        Date dateTime = myRs.getDate(6);
+        Date date = myRs.getDate(6);
+        Time time = myRs.getTime(7);
 
-        return new Feedback(id,name,waypointId,crit,type,dateTime);
+        return new Feedback(id,name,waypointId,crit,type,date,time);
     }
 
     public static void deleteFeedback(String id) throws SQLException {

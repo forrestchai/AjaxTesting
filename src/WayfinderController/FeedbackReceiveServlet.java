@@ -39,6 +39,7 @@ public class FeedbackReceiveServlet extends HttpServlet {
         String waId = "A1-002";
         int randomNum = ThreadLocalRandom.current().nextInt(0000, 9997 + 1);
         java.sql.Date date = new java.sql.Date(Calendar.getInstance().getTime().getTime());
+        java.sql.Time timeNow = new java.sql.Time(date.getTime());
         String fbId = Integer.toString(randomNum);
 
 
@@ -67,7 +68,7 @@ public class FeedbackReceiveServlet extends HttpServlet {
         try
         {
             Waypoint wa = WaypointDA.getWaypointById(waId);
-            Feedback fb = new Feedback(fbId, wa.getName(), wa.getId(), crit, typeInt, date);
+            Feedback fb = new Feedback(fbId, wa.getName(), wa.getId(), crit, typeInt, date, timeNow);
             FeedbackDA.newFeedback(fb);
             WaypointDA.increaseWaypointFeedback(waId);
         }catch(SQLException e){e.printStackTrace();}

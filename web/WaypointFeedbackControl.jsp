@@ -34,19 +34,20 @@
         $(document).ready(function()
         {
             getFeedback();
-            refreshToggle();
         })
 
-        function appendTableFeedback(index, errType, isCrit){
+        function appendTableFeedback(index, errType, isCrit, fbid, fdate, ftime){
 
             var feedbackTable = $('#feedbackTable > tbody:last');
             feedbackTable.append(
                 '<tr>'+
                 '<td>'+ index +'</td>'+
+                '<td>'+ftime+'</td>'+
+                '<td>'+fdate+'</td>'+
                 '<td>'+errType+'</td>'+
                 '<td>'+isCrit+'</td>'+
                 '<td>'+
-                '<a class="btn btn-primary" href="">Dismiss</a>' +
+                '<a class="btn btn-primary" onclick="dismissFeedback('+fbid+')">Dismiss</a>' +
                 '</td>' +
                 '</tr>'
             );
@@ -86,7 +87,7 @@
                                 errType = "Waypoint Inaccessible";
                         }
 
-                        appendTableFeedback(index, errType , f.crit);
+                        appendTableFeedback(index, errType , f.crit, f.id, f.date, f.time);
                         index++;
                     }
 
@@ -97,6 +98,24 @@
 
         }
 
+        function dismissFeedback(fbId) {
+            if(confirm("Are you sure about deleting this feedback?")){
+                window.location = "/feedbackDismiss?from=feedback&all=no&delAllId=no&delId="+fbId;
+            } else {
+                alert("Feedback Delete Cancelled")
+            }
+        }
+
+        function dismissFeedbackWaypoint() {
+
+            var cnfm = prompt("Please enter name of Waypoint", "");
+            if (cnfm == "kjk") {
+                window.location = "";
+            }
+            else{
+                alert("Feedback Delete Cancelled");
+            }
+        }
 
 
     </script>
@@ -182,6 +201,8 @@
                     <thead>
                     <tr>
                         <th style="width:50px">#</th>
+                        <th style="width:50px">Time</th>
+                        <th style="width:50px">Date</th>
                         <th>Feedback Subject</th>
                         <th style="width:230px">Critical issue</th>
                         <th style="width:130px">Action</th>

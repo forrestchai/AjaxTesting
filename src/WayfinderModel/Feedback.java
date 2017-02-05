@@ -1,6 +1,7 @@
 package WayfinderModel;
 
 import java.sql.Date;
+import java.sql.Time;
 import java.time.LocalDateTime;
 
 /**
@@ -13,14 +14,24 @@ public class Feedback {
     boolean crit;
     int type;
     Date date;
+    Time time;
 
-    public Feedback(String id, String name, String waypointId, boolean crit, int type, Date date) {
+    public Feedback(String id, String name, String waypointId, boolean crit, int type, Date date, Time time) {
         this.id = id;
         this.name = name;
         this.waypointId = waypointId;
         this.crit = crit;
         this.type = type;
         this.date = date;
+        this.time = time;
+    }
+
+    public Time getTime() {
+        return time;
+    }
+
+    public void setTime(Time time) {
+        this.time = time;
     }
 
     public String getId() {
