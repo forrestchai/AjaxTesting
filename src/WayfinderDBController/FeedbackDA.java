@@ -76,7 +76,8 @@ public class FeedbackDA {
         ArrayList<Feedback> allFeedback = new ArrayList<Feedback>();
         PreparedStatement myStmt = null;
         ResultSet myRs = null;
-        myStmt = myConn.prepareStatement("SELECT * FROM feedback WHERE waypoint_id = '"+id+"';");
+        myStmt = myConn.prepareStatement("SELECT * FROM feedback WHERE waypoint_id = '"+id+"'" +
+                "ORDER BY date, time DESC;");
         myRs = myStmt.executeQuery();
         while(myRs.next())
         {
