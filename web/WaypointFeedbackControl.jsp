@@ -1,9 +1,14 @@
-
+<%--
+  Created by IntelliJ IDEA.
+  User: User
+  Date: 2/5/2017
+  Time: 2:02 AM
+  To change this template use File | Settings | File Templates.
+--%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 
 <head>
-    <title>Title</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
@@ -12,7 +17,6 @@
           rel="stylesheet" type="text/css">
     <link href="http://pingendo.github.io/pingendo-bootstrap/themes/default/bootstrap.css"
           rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
 
     <script>
 
@@ -21,17 +25,16 @@
             getFeedback();
         })
 
-        function appendTableFeedback(waypointId, waypointName, isEnabled, amt, crit){
+        function appendTableFeedback(index, waypointName, isCrit){
 
             var feedbackTable = $('#feedbackTable > tbody:last');
             feedbackTable.append(
                 '<tr>'+
-                '<td>'+ waypointId +'</td>'+
+                '<td>'+ index +'</td>'+
                 '<td>'+waypointName+'</td>'+
-                '<td>'+isEnabled+'</td>'+
-                '<td>'+amt+'</td>'+
+                '<td>'+isCrit+'</td>'+
                 '<td>'+
-                '<a class="btn btn-primary" href="">View</a>' +
+                '<a class="btn btn-primary" href="">Resolved</a>' +
                 '</td>' +
                 '</tr>'
             );
@@ -40,7 +43,7 @@
 
         function getFeedback(){
 
-            var url = '/services/wayfinderFeedback';
+            var url = '/services/waypointFeedback/A1-003';
             var allFeedback = [];
 
             $.ajax({
@@ -56,10 +59,11 @@
                     for(var i=0; i<response.length; i++)
                     {
                         var f =response[i];
-                        var isEnabled = true;
+                        var index=1;
+                        var isCrit = false;
 
-                        if(f.listValue = 0){
-                            isEnabled = false;
+                        if(f.listValue = 1){
+                            isCrit = true;
                         }
 
                         appendTableFeedback(f.id, f.name, isEnabled, f.feedBackAmt);
@@ -73,7 +77,6 @@
         }
 
     </script>
-
 
 </head>
 
@@ -110,13 +113,21 @@
 <div class="section">
     <div class="container">
         <div class="row">
-            <div class="col-md-12">
-                <h1 class="text-left">Feedback</h1>
+            <div class="col-md-12 text-center">
+                <h1 class="text-left">A&amp;E Entrance</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <p class="text-left">Feedback gathered of the QR waypoint.
+                    <br>
+                </p>
             </div>
         </div>
         <div class="row">
             <div class="col-md-12">
-                <p class="text-left">A table of locations and the amount of feedback the user have on them</p>
+                <h3>Waypoint Status: Enabled</h3>
+                <a class="btn btn-primary">Toggle Status</a>
             </div>
         </div>
     </div>
@@ -125,26 +136,24 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <table class="table" id="feedbackTable">
+                <table class="table" id="waypointTable">
                     <thead>
-                        <tr>
-                            <th style="width:130px">Waypoint #</th>
-                            <th>Waypoint</th>
-                            <th>Status</th>
-                            <th style="width:130px">Faults</th>
-                            <th style="width:150px">Action</th>
-                        </tr>
+                    <tr>
+                        <th style="width:50px">#</th>
+                        <th>Feedback Subject</th>
+                        <th style="width:230px">Critical issue</th>
+                        <th style="width:130px">Action</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>A1-001</td>
-                            <td>A&E Entrance</td>
-                            <td>Enabled</td>
-                            <td>3</td>
-                            <td>
-                                <a class="btn btn-primary">View</a>
-                            </td>
-                        </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>Waypoint Inaccessible</td>
+                        <td>False</td>
+                        <td >
+                            <a class="btn btn-primary">Resolved</a>
+                        </td>
+                    </tr>
                     </tbody>
                 </table>
             </div>

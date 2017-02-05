@@ -67,6 +67,21 @@ public class FeedbackDA {
         return allFeedback;
     }
 
+    public static ArrayList getAllFeedback(String id) throws SQLException {
+        DBController dbController = new DBController();
+        Connection myConn = dbController.getConnection();
+        ArrayList<Feedback> allFeedback = new ArrayList<Feedback>();
+        PreparedStatement myStmt = null;
+        ResultSet myRs = null;
+        myStmt = myConn.prepareStatement("SELECT * FROM feedback WHERE waypoint_id = "+id+";");
+        myRs = myStmt.executeQuery();
+        while(myRs.next())
+        {
+            allFeedback.add(convertToFeedback(myRs));
+        }
+        return allFeedback;
+    }
+
     public static Feedback convertToFeedback(ResultSet myRs) throws SQLException{
         String id = myRs.getString(1);
         String name = myRs.getString(2);

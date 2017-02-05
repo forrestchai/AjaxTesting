@@ -1,6 +1,8 @@
 package WayfinderController;
 import WayfinderDBController.FeedbackDA;
+import WayfinderDBController.WaypointDA;
 import WayfinderModel.Feedback;
+import WayfinderModel.Waypoint;
 import com.google.gson.Gson;
 import com.sun.net.httpserver.HttpServer;
 import com.sun.jersey.api.container.httpserver.HttpServerFactory;
@@ -21,11 +23,10 @@ public class WayfinderFeedbackService{
 
     @GET
     @Produces({MediaType.APPLICATION_JSON})
-    public String getAllFeedback() throws SQLException
+    public String getAllFeedbackWaypoints() throws SQLException
     {
         Gson gson = new Gson();
-        ArrayList<Feedback> fbList = FeedbackDA.getAllFeedback();
-
+        ArrayList<Waypoint> fbList = WaypointDA.getAllWaypointNoAccess();
 
         return gson.toJson(fbList);
     }
