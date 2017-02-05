@@ -185,14 +185,6 @@
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>Waypoint Inaccessible</td>
-                        <td>False</td>
-                        <td >
-                            <a class="btn btn-primary">Dismiss</a>
-                        </td>
-                    </tr>
                     </tbody>
                 </table>
 

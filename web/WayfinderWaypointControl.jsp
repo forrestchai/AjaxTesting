@@ -138,13 +138,6 @@
                     </thead>
                     <tbody>
                         <tr>
-                            <td>A1-001</td>
-                            <td>A&E Entrance</td>
-                            <td>Enabled</td>
-                            <td>3</td>
-                            <td>
-                                <a class="btn btn-primary">View</a>
-                            </td>
                         </tr>
                     </tbody>
                 </table>
