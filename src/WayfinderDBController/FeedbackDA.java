@@ -102,7 +102,7 @@ public class FeedbackDA {
         Connection myConn = dbController.getConnection();
         PreparedStatement myStmt = null;
         ResultSet myRs = null;
-        myStmt = myConn.prepareStatement("DELETE FROM feedback WHERE id="+id+";");
+        myStmt = myConn.prepareStatement("DELETE FROM feedback WHERE id='"+id+"'';");
         myStmt.executeUpdate();
     }
 
@@ -111,7 +111,7 @@ public class FeedbackDA {
         Connection myConn = dbController.getConnection();
         PreparedStatement myStmt = null;
         ResultSet myRs = null;
-        myStmt = myConn.prepareStatement("DELETE FROM feedback WHERE waypoint_id="+id+";");
+        myStmt = myConn.prepareStatement("DELETE FROM feedback WHERE waypoint_id='"+id+"';");
         myStmt.executeUpdate();
     }
 

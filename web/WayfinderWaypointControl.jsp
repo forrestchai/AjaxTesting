@@ -73,6 +73,19 @@
 
         }
 
+        function dismissFeedbackWaypoint() {
+
+            var cnfm = prompt("To Delete all feedback here please enter name of Waypoint", "");
+            console.log(cnfm + " real: ");
+            if (cnfm == "") {
+                alert("All entries deleted from waypoint")
+                window.location = "/feedbackDismiss?from=feedback&all=no&delAllId=no&delId=no";
+            }
+            else{
+                alert("Feedback Delete Cancelled");
+            }
+        }
+
     </script>
 
 

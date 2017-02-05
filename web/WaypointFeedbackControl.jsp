@@ -108,9 +108,11 @@
 
         function dismissFeedbackWaypoint() {
 
-            var cnfm = prompt("Please enter name of Waypoint", "");
-            if (cnfm == "kjk") {
-                window.location = "";
+            var cnfm = prompt("To Delete all feedback here please enter name of Waypoint", "");
+            console.log(cnfm + " real: <%=name%>");
+            if (cnfm == "<%=name%>") {
+                alert("All entries deleted from waypoint")
+                window.location = "/feedbackDismiss?from=feedback&all=no&delAllId=<%=waId%>&delId=no";
             }
             else{
                 alert("Feedback Delete Cancelled");
@@ -212,7 +214,7 @@
                     </tbody>
                 </table>
 
-                <a class="btn btn-primary" style="display: inline">Dismiss All</a>
+                <a class="btn btn-primary" style="display: inline" onclick="dismissFeedbackWaypoint()">Dismiss All</a>
                 <a class="btn btn-primary" style="display: inline" href="WayfinderWaypointControl.jsp">Back</a>
             </div>
         </div>

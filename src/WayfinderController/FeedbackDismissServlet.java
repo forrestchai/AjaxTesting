@@ -48,7 +48,7 @@ public class FeedbackDismissServlet extends HttpServlet {
                 FeedbackDA.deleteAllIdFeedback(delAllId);
                 WaypointDA.decreaseWaypointFeedback(wa.getId(), fbNum);
             }
-            else
+            else if (!delId.equalsIgnoreCase("no"))
             {
                 FeedbackDA.deleteFeedback(delId);
                 Waypoint wa = (Waypoint) session.getAttribute("feedbackSelected");
