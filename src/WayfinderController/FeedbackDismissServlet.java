@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  * Created by User on 2/6/2017.
@@ -36,12 +37,21 @@ public class FeedbackDismissServlet extends HttpServlet {
         try
         {
 
-//        if(!delAll.equalsIgnoreCase("no"))
-//        {
-//
-//        }
-//        else
-            if (!delAllId.equalsIgnoreCase("no"))
+        if(!delAll.equalsIgnoreCase("no"))
+        {
+
+            ArrayList<Waypoint> wa = WaypointDA.getAllWaypointNoAccess();
+
+            for(int i=0; i<wa.size(); i++){
+
+                FeedbackDA.deleteAllIdFeedback(delAllId);
+                WaypointDA.decreaseWaypointFeedback(wa.get(i).getId(), wa.get(i).getFeedBackAmt());
+                WaypointDA.enableWaypoint(wa.get(i).getId());
+
+            }
+
+        }
+        else if (!delAllId.equalsIgnoreCase("no"))
             {
                 Waypoint wa = (Waypoint) session.getAttribute("feedbackSelected");
                 int fbNum = FeedbackDA.getAllFeedback(wa.getId()).size();
@@ -50,6 +60,8 @@ public class FeedbackDismissServlet extends HttpServlet {
             }
             else if (!delId.equalsIgnoreCase("no"))
             {
+                System.out.println("FINAL FBID IS "+ delId);
+
                 FeedbackDA.deleteFeedback(delId);
                 Waypoint wa = (Waypoint) session.getAttribute("feedbackSelected");
                 WaypointDA.decreaseWaypointFeedback(wa.getId(), 1);
@@ -61,7 +73,7 @@ public class FeedbackDismissServlet extends HttpServlet {
         switch(location){
             case "feedback": response.sendRedirect("WaypointFeedbackControl.jsp");
                 break;
-            default:  response.sendRedirect("WayfinderWaypoinControl.jsp");
+            default:  response.sendRedirect("WayfinderWaypointControl.jsp");
                 break;
         }
 

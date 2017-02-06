@@ -73,16 +73,16 @@
 
         }
 
-        function dismissFeedbackWaypoint() {
-
-            var cnfm = prompt("To Delete all feedback here please enter name of Waypoint", "");
-            console.log(cnfm + " real: ");
-            if (cnfm == "") {
-                alert("All entries deleted from waypoint")
-                window.location = "/feedbackDismiss?from=feedback&all=no&delAllId=no&delId=no";
-            }
-            else{
-                alert("Feedback Delete Cancelled");
+        function dismissAndReset() {
+            if(confirm("Are you sure about deleting and resetting all feedback Data?")){
+                var cnfm = prompt("To Delete all feedback here please type \"Confirm Delete All\" ", "");
+                if (cnfm == "Confirm Delete All") {
+                    alert("All entries deleted from waypoint");
+                    window.location = "/feedbackDismiss?from=menu&all=yes&delAllId=no&delId=no";
+                }
+                else{
+                    alert("Feedback Delete Cancelled");
+                }
             }
         }
 
@@ -126,11 +126,12 @@
         <div class="row">
             <div class="col-md-12">
                 <h1 class="text-left">Feedback</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-12">
                 <p class="text-left">A table of locations and the amount of feedback the user have on them</p>
+            </div>
+            <div class="col-md-12">
+                <h3 class="text-left">Reset Table</h3>
+                <p class="text-left">Resets all feedback tables to empty, and enables all Waypoints</p>
+                <h4 class="text-left"> <a class="btn btn-primary text-right" onclick="dismissAndReset()">Reset</a></h4>
             </div>
         </div>
     </div>

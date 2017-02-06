@@ -38,6 +38,8 @@
 
         function appendTableFeedback(index, errType, isCrit, fbid, fdate, ftime){
 
+            console.log("fbId is "+ fbid);
+
             var feedbackTable = $('#feedbackTable > tbody:last');
             feedbackTable.append(
                 '<tr>'+
@@ -100,6 +102,7 @@
 
         function dismissFeedback(fbId) {
             if(confirm("Are you sure about deleting this feedback?")){
+                alert("Feedback deleted");
                 window.location = "/feedbackDismiss?from=feedback&all=no&delAllId=no&delId="+fbId;
             } else {
                 alert("Feedback Delete Cancelled")
@@ -182,7 +185,8 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <a class="btn btn-primary" style="display: inline" onclick="setTimeout(refreshToggle(), 1000)" href="/enableWaypoint?id=<%=waId%>" >Toggle Status</a>
+                <a class="btn btn-primary" style="display: inline" onclick="setTimeout(refreshToggle(), 1000); alert('Waypoint Disabled.');"
+                   href="/enableWaypoint?id=<%=waId%>" >Toggle Status</a>
             </div>
             <div class="col-md-3">
                 <a class="btn btn-primary" style="display: inline">Increase Coeff.</a>
